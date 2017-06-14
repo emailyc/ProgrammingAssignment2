@@ -1,7 +1,12 @@
-## Put comments here that give an overall description of what your
-## functions do
+## The functions recieves a matrix and attempts to calaulate an inverse of it. 
+#The functions then cache the result in memory. So instead of retrieving the inversed matrix by 
+#running a calculation everytime it's called, the instance of one of the function has a method whcih 
+#retrieves the cached result from memory. This is made possible by lexical scoping which 
+#symols inside a function look for it's value in the environment where the function is defined.
 
-## Write a short comment describing this function
+## makeCacheMatrix recieves a matrix as argument. The function returns four functions 
+#which are getters and setters. Instance of makeCacheMatrix can assign/change the value x and m
+# by calling these four methods.
 
 makeCacheMatrix <- function(x = matrix()) {
     
@@ -25,10 +30,15 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Write a short comment describing this function
+## cacheSolve takes an instance of the makeCacheMatrix function as it's argument.
+#cacheSolve checks whether m has a value. If m has a value, cacheSolve retrieves m's
+#value from memory. If m is null, then cacheSolve calls the methods of the makeCacheMatrix instance
+#which are getters and setters of x and m. 
+#m (the inversed matrix) is returned at the end of cacheSolve. And also alters/assign 
+#value to the m symbol in the makeCacheMatrix instance.
 
 cacheSolve <- function(x, ...) {
-    ## Return a matrix that is the inverse of 'x'
+    
     
     m <- x$getmatrix()
     if(!is.null(m)) {
@@ -38,5 +48,5 @@ cacheSolve <- function(x, ...) {
     data <- x$get()
     m <- solve(data, ...)
     x$setmatrix(m)
-    m
+    m ## Return a matrix that is the inverse of 'x'
 }
